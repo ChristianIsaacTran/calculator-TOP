@@ -34,3 +34,23 @@ user presses the (=) button, according to the operator that was selected between
     an operator twice, it will not do a calculation. (pressing 2 + + does not equal 2 + 2 = 4, it should wait until another number is given)
 Extra credits located on TOP calculator page: https://www.theodinproject.com/lessons/foundations-calculator
     */
+
+//Step 1: basic add, subtract, multiply, and divide functions
+function add(num1, num2){
+    return num1 + num2;
+}
+
+function subtract(num1, num2){
+    return num1 - num2;
+}
+
+function multiply(num1, num2){
+    return num1 * num2;
+}
+
+function divide(num1, num2){
+    if(num2 === 0){
+        return "ERROR, DIVISION BY ZERO";
+    }
+    return Math.round((num1 / num2) * 10000) / 10000; //round to the nearest 4th decimal place
+}
