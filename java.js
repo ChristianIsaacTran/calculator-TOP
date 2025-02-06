@@ -36,21 +36,43 @@ Extra credits located on TOP calculator page: https://www.theodinproject.com/les
     */
 
 //Step 1: basic add, subtract, multiply, and divide functions
-function add(num1, num2){
+function add(num1, num2) {
     return num1 + num2;
 }
 
-function subtract(num1, num2){
+function subtract(num1, num2) {
     return num1 - num2;
 }
 
-function multiply(num1, num2){
+function multiply(num1, num2) {
     return num1 * num2;
 }
 
-function divide(num1, num2){
-    if(num2 === 0){
+function divide(num1, num2) {
+    if (num2 === 0) {
         return "ERROR, DIVISION BY ZERO";
     }
     return Math.round((num1 / num2) * 10000) / 10000; //round to the nearest 4th decimal place
 }
+
+//step 2: create 3 variables that represent a part of the calculator operation
+let operand1 = 0;
+let operator = "";
+let operand2 = 0;
+
+//step 3: Create a function that takes the operator and two numbers then performs the operation on the numbers (call it operate()) by
+//calling the functions made above in step 1.
+function operate(operand1, operator, operand2) {
+    switch (operator) {
+        case "+":
+            return add(operand1, operand2);
+        case "-":
+            return subtract(operand1, operand2);
+        case "*":
+            return multiply(operand1, operand2);
+        case "/":
+            return divide(operand1, operand2);
+    }
+}
+
+//step 4: creating basic HTML calculator with buttons with each digit and operators including the (=)
