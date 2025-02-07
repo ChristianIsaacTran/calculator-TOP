@@ -75,4 +75,4 @@ function operate(operand1, operator, operand2) {
     }
 }
 
-//step 4: creating basic HTML calculator with buttons with each digit and operators including the (=)
+//step 4: creating basic HTML calculator with buttons with each digit and operators including the (=) 
