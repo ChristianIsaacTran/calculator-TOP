@@ -32,7 +32,7 @@ h1 {
 
 .mainContainer {
     width: 740px;
-    height: 840px;
+    height: 931px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -63,6 +63,36 @@ h1 {
 }
 
 .buttonContainer {
-    padding: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
     flex: 1;
+}
+
+button {
+    font-size: 65px;
+    font-weight: 900;
+    height: 128px;
+    aspect-ratio: 1/1;
+    flex: 1;
+}
+
+.num {
+    background-color: lightgrey;
+}
+
+.operator {
+    background-color: grey;
+}
+
+.modifier {
+    background-color:blanchedalmond;
+}
+
+.clear {
+    background-color: red;
+}
+
+.equals {
+    background-color: lightskyblue;
 }
