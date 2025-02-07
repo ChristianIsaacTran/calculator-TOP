@@ -12,6 +12,8 @@ body {
 }
 
 h1 {
+    margin: 0px;
+    margin-bottom: 10px;
     font-size: 60px;
     font-weight: 900;
     text-decoration: underline;
@@ -46,8 +48,18 @@ h1 {
 }
 
 .display {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 668px;
+    height: 142px;
     padding: 40px;
     flex: 0.1;
+}
+
+.displayContent {
+    font-weight: 900;
+    font-size: 60px;
 }
 
 .buttonContainer {
