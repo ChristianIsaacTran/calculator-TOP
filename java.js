@@ -76,3 +76,21 @@ function operate(operand1, operator, operand2) {
 }
 
 //step 4: creating basic HTML calculator with buttons with each digit and operators including the (=) 
+//Done in HTML
+
+//step 5: Create functions that populate the display when clicking the digit buttons.
+//      - Should store content of the display (the number) in a variable for use in the next step
+const calcDisplay = document.querySelector(".displayContent");
+let displayStored = ""; //Used to store the display of the calculator for use in the next step
+
+function displayChangeDigits(){
+    const numNodeList = document.querySelectorAll(".num");
+    numNodeList.forEach((digitButton) => { //Assign event listener for every digit button so that display changes to number pressed
+        digitButton.addEventListener("click", function() {
+            calcDisplay.textContent = digitButton.textContent;
+            displayStored = calcDisplay.textContent;
+        });
+    });
+}
+
+displayChangeDigits();
