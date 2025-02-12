@@ -63,6 +63,7 @@ let operand2 = 0;
 //step 3: Create a function that takes the operator and two numbers then performs the operation on the numbers (call it operate()) by
 //calling the functions made above in step 1.
 function operate(operand1, operator, operand2) {
+    console.log("OPERATE CALLED ON: " + operator);
     switch (operator) {
         case "+":
             return add(operand1, operand2);
@@ -83,12 +84,20 @@ function operate(operand1, operator, operand2) {
 const calcDisplay = document.querySelector(".displayContent");
 let displayStored = ""; //Used to store the display of the calculator for use in the next step
 
-function displayChangeDigits(){
+function displayChangeDigits() {
     const numNodeList = document.querySelectorAll(".num");
     numNodeList.forEach((digitButton) => { //Assign event listener for every digit button so that display changes to number pressed
-        digitButton.addEventListener("click", function() {
-            displayStored += digitButton.textContent;
-            calcDisplay.textContent = displayStored;
+        digitButton.addEventListener("click", function () {
+            if (equalsUsed === true) {
+                reset();
+                displayStored += digitButton.textContent;
+                calcDisplay.textContent = displayStored;
+                equalsUsed = false;
+            }
+            else {
+                displayStored += digitButton.textContent;
+                calcDisplay.textContent = displayStored;
+            }
         });
     });
 }
@@ -105,54 +114,109 @@ displayChangeDigits();
 */
 
 //Used to display to user what operation is currently selected before pressing "="
-const operationDisplay = document.querySelector(".operationBox"); 
+const operationDisplay = document.querySelector(".operationBox");
 
-//Clear button resets the calculator display and variable back to empty string
-const clearButton = document.querySelector(".clear");
-clearButton.addEventListener("click", function() {
+//function to reset calculator
+function reset() {
     displayStored = "";
     calcDisplay.textContent = "";
-    operationDisplay = "";
+    operationDisplay.textContent = "";
     operand1 = 0;
     operand2 = 0;
     operator = "";
-});
+    equalsUsed = false;
+    operationClicked = 0;
+}
+
+//function to check if user has empty display
+function displayEmpty() {
+    if (displayStored === "") {
+        return 0;
+    }
+    else {
+        return parseInt(displayStored);
+    }
+}
+
+
+//Clear button resets the calculator display and variable back to empty string
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", reset);
 
 //Addition button
 /*
 1. store operator chosen
 2. store first operand
-3. make sure when pressing operator repeatedly, do not store over first operand again
+3. make sure when pressing operator repeatedly, store the display into operand 1
 */
+//A counter to check if the operator button has been clicked twice in quick succession
+let operationClicked = 0;
+
 const addButton = document.querySelector(".add");
-addButton.addEventListener("click", function() {
-    operationDisplay.textContent = "Operation: Addition";
-    operator = "+";
+addButton.addEventListener("click", function () {
+    operationClicked++;
+    if (operationClicked > 1) {
+        operationDisplay.textContent = "ERROR";
+        calcDisplay.textContent = "ERROR";
+        used = true;
+    }
+    else {
+        operationDisplay.textContent = "Operation: Addition";
+        operator = "+";
+        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+
+
+        if (equalsUsed === true) {
+            equalsUsed = false;
+            operand1 = parseInt(displayStored);
+        }
+
+        displayStored = "";
+        calcDisplay.textContent = displayStored;
+    }
 });
 
 //Subtraction button
 const subButton = document.querySelector(".sub");
-subButton.addEventListener("click", function() {
+subButton.addEventListener("click", function () {
     operationDisplay.textContent = "Operation: Subtraction";
     operator = "-";
 });
 
 //Multiplication button
 const multButton = document.querySelector(".mult");
-multButton.addEventListener("click", function() {
+multButton.addEventListener("click", function () {
     operationDisplay.textContent = "Operation: Multiplication";
     operator = "*";
 });
 
 //Division button
 const divisButton = document.querySelector(".divis");
-divisButton.addEventListener("click", function() {
+divisButton.addEventListener("click", function () {
     operationDisplay.textContent = "Operation: Division";
     operator = "/";
 });
 
 //Equals button (Evaluate button) 
-const equalsButton = document.querySelector(".equals");
-equalsButton.addEventListener("click", function(){
+/*
+1. store second operand2 
+2. call operate() function to evaluate the current selected operation
+3. display the results in the calculator display.
+*/
+//boolean variable to prevent multiple calculations with = button
+let equalsUsed = false;
 
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener("click", function () {
+    if (equalsUsed === false) {
+        operand2 = displayEmpty(); //Check if display is left empty "" then assign operand2 to 0
+
+        console.log("Operand1: " + operand1);
+        console.log("Operand2: " + operand2);
+        equalsUsed = true;
+        operationClicked = 0;
+        displayStored = operate(operand1, operator, operand2);
+        calcDisplay.textContent = displayStored;
+    }
 });
