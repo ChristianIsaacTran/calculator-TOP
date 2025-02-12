@@ -103,9 +103,14 @@ displayChangeDigits();
 3. When pressing equals button, call operate() with operand 1, operand 2, and the operation
 4. Add functionality to other buttons, but work on operation buttons for now.
 */
-/*
-const addButton = document.querySelector(".add");
-addButton.addEventListener("click", function (){
-    
+
+//Clear button resets the calculator display and variable back to empty string
+const clearButton = document.querySelector(".clear");
+clearButton.addEventListener("click", function() {
+    displayStored = "";
+    calcDisplay.textContent = "";
+    console.log("RESET");
 });
-*/
+
+
+
