@@ -21,18 +21,20 @@ h1 {
 
 .mainContainer,
 .display,
-.buttonContainer {
+.buttonContainer,
+.operationBox {
     border: 6px solid;
 }
 
 .display,
-.buttonContainer {
+.buttonContainer,
+.operationBox {
     border-color: grey;
 }
 
 .mainContainer {
     width: 740px;
-    height: 931px;
+    height: 1050px;
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -100,4 +102,19 @@ button {
 
 .equals {
     background-color: lightskyblue;
+}
+
+.operationContainer{
+    display: flex;
+    justify-content: end;
+}
+.operationBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    width: 250px;
+    height: 70px;
+    font-weight: 900;
+    font-size: 25px;
 }

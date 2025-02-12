@@ -104,13 +104,44 @@ displayChangeDigits();
 4. Add functionality to other buttons, but work on operation buttons for now.
 */
 
+//Used to display to user what operation is currently selected before pressing "="
+const operationDisplay = document.querySelector(".operationBox"); 
+
 //Clear button resets the calculator display and variable back to empty string
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", function() {
     displayStored = "";
     calcDisplay.textContent = "";
-    console.log("RESET");
+    operationDisplay = "";
+    operand1 = 0;
+    operand2 = 0;
+    operator = "";
 });
 
+//Addition button
+const addButton = document.querySelector(".add");
+addButton.addEventListener("click", function() {
+    operationDisplay.textContent = "Operation: Addition";
+    operator = "+";
+});
 
+//Subtraction button
+const subButton = document.querySelector(".sub");
+subButton.addEventListener("click", function() {
+    operationDisplay.textContent = "Operation: Subtraction";
+    operator = "-";
+});
 
+//Multiplication button
+const multButton = document.querySelector(".mult");
+multButton.addEventListener("click", function() {
+    operationDisplay.textContent = "Operation: Multiplication";
+    operator = "*";
+});
+
+//Division button
+const divisButton = document.querySelector(".divis");
+divisButton.addEventListener("click", function() {
+    operationDisplay.textContent = "Operation: Division";
+    operator = "/";
+});
