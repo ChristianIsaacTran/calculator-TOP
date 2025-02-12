@@ -87,10 +87,25 @@ function displayChangeDigits(){
     const numNodeList = document.querySelectorAll(".num");
     numNodeList.forEach((digitButton) => { //Assign event listener for every digit button so that display changes to number pressed
         digitButton.addEventListener("click", function() {
-            calcDisplay.textContent = digitButton.textContent;
-            displayStored = calcDisplay.textContent;
+            displayStored += digitButton.textContent;
+            calcDisplay.textContent = displayStored;
         });
     });
 }
 
 displayChangeDigits();
+
+//Step 6: Make the calculator work.
+
+/* 
+1. When pressing operator button store what operation I am doing
+2. Find a way to store operator 1 and operator 2
+3. When pressing equals button, call operate() with operand 1, operand 2, and the operation
+4. Add functionality to other buttons, but work on operation buttons for now.
+*/
+/*
+const addButton = document.querySelector(".add");
+addButton.addEventListener("click", function (){
+    
+});
+*/
