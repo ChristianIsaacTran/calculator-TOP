@@ -50,7 +50,7 @@ function multiply(num1, num2) {
 
 function divide(num1, num2) {
     if (num2 === 0) {
-        return "ERROR, DIVISION BY ZERO";
+        return "Bruh.";
     }
     return Math.round((num1 / num2) * 10000) / 10000; //round to the nearest 4th decimal place
 }
@@ -119,6 +119,11 @@ clearButton.addEventListener("click", function() {
 });
 
 //Addition button
+/*
+1. store operator chosen
+2. store first operand
+3. make sure when pressing operator repeatedly, do not store over first operand again
+*/
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", function() {
     operationDisplay.textContent = "Operation: Addition";
@@ -144,4 +149,10 @@ const divisButton = document.querySelector(".divis");
 divisButton.addEventListener("click", function() {
     operationDisplay.textContent = "Operation: Division";
     operator = "/";
+});
+
+//Equals button (Evaluate button) 
+const equalsButton = document.querySelector(".equals");
+equalsButton.addEventListener("click", function(){
+
 });
