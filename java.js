@@ -96,6 +96,7 @@ function displayChangeDigits() {
         digitButton.addEventListener("click", function () {
             //Checks if the calculator error'd out. If true, then do not allow user to type more numbers.
             if (errorActivated === false) {
+                sameOpButtonCount = 0;
                 //Resets the display and math expression if the equals sign has been used already for new calculation
                 if (equalsUsed === true) {
                     reset();
@@ -150,6 +151,7 @@ function reset() {
     operationClicked = 0;
     errorActivated = false;
     continuousExpression = false;
+    sameOpButtonCount = 0;
 
 }
 
@@ -183,9 +185,17 @@ let errorActivated = false;
 //A boolean flag to tell if the user is continuously adding to the expression by pressing the operator
 let continuousExpression = false;
 
+//This is a counter to check if the operator buttons are pressed twice. ex: 2 + +  <--- should not evaluate
+let sameOpButtonCount = 0;
+
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", function () {
     operationClicked++;
+    sameOpButtonCount++;
+
+    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
+        return; 
+    }
 
     //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
     if (operationClicked > 1 && operator != "+") {
@@ -240,6 +250,11 @@ addButton.addEventListener("click", function () {
 const subButton = document.querySelector(".sub");
 subButton.addEventListener("click", function () {
     operationClicked++;
+    sameOpButtonCount++;
+
+    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
+        return; 
+    }
 
     //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
     if (operationClicked > 1 && operator != "-") {
@@ -293,6 +308,11 @@ subButton.addEventListener("click", function () {
 const multButton = document.querySelector(".mult");
 multButton.addEventListener("click", function () {
     operationClicked++;
+    sameOpButtonCount++;
+
+    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
+        return; 
+    }
 
     //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
     if (operationClicked > 1 && operator != "*") {
@@ -346,6 +366,11 @@ multButton.addEventListener("click", function () {
 const divisButton = document.querySelector(".divis");
 divisButton.addEventListener("click", function () {
     operationClicked++;
+    sameOpButtonCount++;
+
+    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
+        return; 
+    }
 
     //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
     if(operationClicked > 1 && operator != "/"){
