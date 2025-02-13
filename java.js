@@ -150,6 +150,7 @@ function reset() {
     operationClicked = 0;
     errorActivated = false;
     continuousExpression = false;
+
 }
 
 //function to check if user has empty display
@@ -182,9 +183,6 @@ let errorActivated = false;
 //A boolean flag to tell if the user is continuously adding to the expression by pressing the operator
 let continuousExpression = false;
 
-//Check if the button user pressed is the same or a different operation button
-let diffButtonCheck = false;
-
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", function () {
     operationClicked++;
@@ -197,7 +195,6 @@ addButton.addEventListener("click", function () {
         operand1 = displayEmpty();
         operationDisplay.textContent = "Operation: Addition";
         operator = "+";
-        diffButtonCheck = true;
         continuousExpression = true;
         return;
     }
@@ -252,7 +249,6 @@ subButton.addEventListener("click", function () {
         operand1 = displayEmpty();
         operationDisplay.textContent = "Operation: Subtraction";
         operator = "-";
-        diffButtonCheck = true;
         continuousExpression = true;
         return;
     }
@@ -324,7 +320,6 @@ equalsButton.addEventListener("click", function () {
         calcDisplay.textContent = "ERROR";
         operationDisplay.textContent = "ERROR";
     }
-
 
     //As long as there is no error and the equals hasn't been used
     if (equalsUsed === false && errorActivated === false) {
