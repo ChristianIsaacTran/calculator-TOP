@@ -64,20 +64,20 @@ let operand2 = 0;
 //calling the functions made above in step 1.
 function operate(operand1, operator, operand2) {
     console.log("OPERATE CALLED ON: " + operator);
-    console.log("Operand 1: "+ operand1);
-    console.log("Operand 2: "+ operand2);
+    console.log("Operand 1: " + operand1);
+    console.log("Operand 2: " + operand2);
     switch (operator) {
         case "+":
-            console.log("RESULT: "+ add(operand1, operand2));
+            console.log("RESULT: " + add(operand1, operand2));
             return add(operand1, operand2);
         case "-":
-            console.log("RESULT: "+ subtract(operand1, operand2));
+            console.log("RESULT: " + subtract(operand1, operand2));
             return subtract(operand1, operand2);
         case "*":
-            console.log("RESULT: "+ multiply(operand1, operand2));
+            console.log("RESULT: " + multiply(operand1, operand2));
             return multiply(operand1, operand2);
         case "/":
-            console.log("RESULT: "+ divide(operand1, operand2));
+            console.log("RESULT: " + divide(operand1, operand2));
             return divide(operand1, operand2);
     }
 }
@@ -188,7 +188,7 @@ addButton.addEventListener("click", function () {
     operationClicked++;
 
     //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
-    if(operationClicked > 1 && operator != "+"){
+    if (operationClicked > 1 && operator != "+") {
         operand2 = displayEmpty();
         displayStored = operate(operand1, operator, operand2);
         calcDisplay.textContent = displayStored;
@@ -242,7 +242,7 @@ subButton.addEventListener("click", function () {
     operationClicked++;
 
     //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
-    if(operationClicked > 1 && operator != "-"){
+    if (operationClicked > 1 && operator != "-") {
         operand2 = displayEmpty();
         displayStored = operate(operand1, operator, operand2);
         calcDisplay.textContent = displayStored;
@@ -252,7 +252,7 @@ subButton.addEventListener("click", function () {
         continuousExpression = true;
         return;
     }
-    
+
     //If the user keeps adding things to the math expression, then calculate and use result in next operation
     if (operationClicked > 1 && equalsUsed === false) {
 
@@ -292,15 +292,107 @@ subButton.addEventListener("click", function () {
 //Multiplication button
 const multButton = document.querySelector(".mult");
 multButton.addEventListener("click", function () {
-    operationDisplay.textContent = "Operation: Multiplication";
-    operator = "*";
+    operationClicked++;
+
+    //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
+    if (operationClicked > 1 && operator != "*") {
+        operand2 = displayEmpty();
+        displayStored = operate(operand1, operator, operand2);
+        calcDisplay.textContent = displayStored;
+        operand1 = displayEmpty();
+        operationDisplay.textContent = "Operation: Multiplication";
+        operator = "*";
+        continuousExpression = true;
+        return;
+    }
+
+    //If the user keeps adding things to the math expression, then calculate and use result in next operation
+    if (operationClicked > 1 && equalsUsed === false) {
+
+        operationDisplay.textContent = "Operation: Multiplication";
+        operator = "*";
+        operand2 = displayEmpty();
+        if (equalsUsed === true) {
+            equalsUsed = false;
+            operand1 = parseInt(displayStored);
+        }
+
+        displayStored = "";
+        calcDisplay.textContent = displayStored;
+        displayStored = operate(operand1, operator, operand2);
+        calcDisplay.textContent = displayStored;
+        operand1 = displayEmpty();
+        operationClicked = 1;
+        continuousExpression = true;
+    }
+    else {
+        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
+        operationDisplay.textContent = "Operation: Multiplication";
+        operator = "*";
+        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+        //Allows the result to be used in the next operation
+        if (equalsUsed === true) {
+            equalsUsed = false;
+            operand1 = parseInt(displayStored);
+        }
+
+        displayStored = "";
+        calcDisplay.textContent = displayStored;
+    }
 });
 
 //Division button
 const divisButton = document.querySelector(".divis");
 divisButton.addEventListener("click", function () {
-    operationDisplay.textContent = "Operation: Division";
-    operator = "/";
+    operationClicked++;
+
+    //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
+    if(operationClicked > 1 && operator != "/"){
+        operand2 = displayEmpty();
+        displayStored = operate(operand1, operator, operand2);
+        calcDisplay.textContent = displayStored;
+        operand1 = displayEmpty();
+        operationDisplay.textContent = "Operation: Division";
+        operator = "/";
+        continuousExpression = true;
+        return;
+    }
+    
+    //If the user keeps adding things to the math expression, then calculate and use result in next operation
+    if (operationClicked > 1 && equalsUsed === false) {
+
+        operationDisplay.textContent = "Operation: Division";
+        operator = "/";
+        operand2 = displayEmpty();
+        if (equalsUsed === true) {
+            equalsUsed = false;
+            operand1 = parseInt(displayStored);
+        }
+
+        displayStored = "";
+        calcDisplay.textContent = displayStored;
+        displayStored = operate(operand1, operator, operand2);
+        calcDisplay.textContent = displayStored;
+        operand1 = displayEmpty();
+        operationClicked = 1;
+        continuousExpression = true;
+    }
+    else {
+        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
+        operationDisplay.textContent = "Operation: Division";
+        operator = "/";
+        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+        //Allows the result to be used in the next operation
+        if (equalsUsed === true) {
+            equalsUsed = false;
+            operand1 = parseInt(displayStored);
+        }
+
+        displayStored = "";
+        calcDisplay.textContent = displayStored;
+    }
 });
 
 //Equals button (Evaluate button) 
