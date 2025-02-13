@@ -86,17 +86,33 @@ let displayStored = ""; //Used to store the display of the calculator for use in
 
 function displayChangeDigits() {
     const numNodeList = document.querySelectorAll(".num");
-    numNodeList.forEach((digitButton) => { //Assign event listener for every digit button so that display changes to number pressed
+    numNodeList.forEach((digitButton) => {
         digitButton.addEventListener("click", function () {
-            if (equalsUsed === true) {
-                reset();
-                displayStored += digitButton.textContent;
-                calcDisplay.textContent = displayStored;
-                equalsUsed = false;
-            }
-            else {
-                displayStored += digitButton.textContent;
-                calcDisplay.textContent = displayStored;
+            //Checks if the calculator error'd out. If true, then do not allow user to type more numbers.
+            if (errorActivated === false) {
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += digitButton.textContent;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += digitButton.textContent;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += digitButton.textContent;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
             }
         });
     });
@@ -116,7 +132,7 @@ displayChangeDigits();
 //Used to display to user what operation is currently selected before pressing "="
 const operationDisplay = document.querySelector(".operationBox");
 
-//function to reset calculator
+//function to reset calculator and boolean flags
 function reset() {
     displayStored = "";
     calcDisplay.textContent = "";
@@ -126,6 +142,8 @@ function reset() {
     operator = "";
     equalsUsed = false;
     operationClicked = 0;
+    errorActivated = false;
+    continuousExpression = false;
 }
 
 //function to check if user has empty display
@@ -139,7 +157,7 @@ function displayEmpty() {
 }
 
 
-//Clear button resets the calculator display and variable back to empty string
+//Clear button resets the calculator display and variables back to empty string
 const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", reset);
 
@@ -152,21 +170,42 @@ clearButton.addEventListener("click", reset);
 //A counter to check if the operator button has been clicked twice in quick succession
 let operationClicked = 0;
 
+//A boolean flag to tell if the calculator error'd out
+let errorActivated = false;
+
+//A boolean flag to tell if the user is continuously adding to the expression by pressing the operator
+let continuousExpression = false;
+
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", function () {
     operationClicked++;
-    if (operationClicked > 1) {
-        operationDisplay.textContent = "ERROR";
-        calcDisplay.textContent = "ERROR";
-        used = true;
+
+    //If the user keeps adding things to the math expression, then calculate and use result in next operation
+    if (operationClicked > 1 && equalsUsed === false) {
+
+        operationDisplay.textContent = "Operation: Addition";
+        operator = "+";
+        operand2 = displayEmpty();
+        if (equalsUsed === true) {
+            equalsUsed = false;
+            operand1 = parseInt(displayStored);
+        }
+
+        displayStored = "";
+        calcDisplay.textContent = displayStored;
+        displayStored = operate(operand1, operator, operand2);
+        calcDisplay.textContent = displayStored;
+        operand1 = displayEmpty();
+        operationClicked = 1;
+        continuousExpression = true;
     }
     else {
+        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
         operationDisplay.textContent = "Operation: Addition";
         operator = "+";
         operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
 
-
-
+        //Allows the result to be used in the next operation
         if (equalsUsed === true) {
             equalsUsed = false;
             operand1 = parseInt(displayStored);
@@ -175,6 +214,7 @@ addButton.addEventListener("click", function () {
         displayStored = "";
         calcDisplay.textContent = displayStored;
     }
+
 });
 
 //Subtraction button
@@ -209,14 +249,21 @@ let equalsUsed = false;
 
 const equalsButton = document.querySelector(".equals");
 equalsButton.addEventListener("click", function () {
-    if (equalsUsed === false) {
-        operand2 = displayEmpty(); //Check if display is left empty "" then assign operand2 to 0
+    //If there is no operation and the user presses equals, then error out.
+    if(operationClicked === 0){
+        errorActivated = true;
+        calcDisplay.textContent = "ERROR";
+        operationDisplay.textContent = "ERROR";
+    }
 
-        console.log("Operand1: " + operand1);
-        console.log("Operand2: " + operand2);
+
+    //As long as there is no error and the equals hasn't been used
+    if (equalsUsed === false && errorActivated === false) {
+        operand2 = displayEmpty(); //Check if display is left empty "" then assign operand2 to 0
         equalsUsed = true;
         operationClicked = 0;
         displayStored = operate(operand1, operator, operand2);
         calcDisplay.textContent = displayStored;
+        operationDisplay.textContent = "";
     }
 });
