@@ -190,233 +190,256 @@ let sameOpButtonCount = 0;
 
 const addButton = document.querySelector(".add");
 addButton.addEventListener("click", function () {
-    operationClicked++;
-    sameOpButtonCount++;
-
-    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
-        return; 
-    }
-
-    //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
-    if (operationClicked > 1 && operator != "+") {
-        operand2 = displayEmpty();
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationDisplay.textContent = "Operation: Addition";
-        operator = "+";
-        continuousExpression = true;
+    //Error check
+    if (errorActivated === true) {
         return;
     }
-
-    //If the user keeps adding things to the math expression, then calculate and use result in next operation
-    if (operationClicked > 1 && equalsUsed === false) {
-
-        operationDisplay.textContent = "Operation: Addition";
-        operator = "+";
-        operand2 = displayEmpty();
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
-        }
-
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationClicked = 1;
-        continuousExpression = true;
-    }
     else {
-        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
-        operationDisplay.textContent = "Operation: Addition";
-        operator = "+";
-        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+        operationClicked++;
+        sameOpButtonCount++;
 
-        //Allows the result to be used in the next operation
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
+        if (sameOpButtonCount >= 2) { //If the same operator button is pressed, do NOT do anything.
+            return;
         }
 
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
-    }
+        //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
+        if (operationClicked > 1 && operator != "+") {
+            operand2 = displayEmpty();
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationDisplay.textContent = "Operation: Addition";
+            operator = "+";
+            continuousExpression = true;
+            return;
+        }
 
+        //If the user keeps adding things to the math expression, then calculate and use result in next operation
+        if (operationClicked > 1 && equalsUsed === false) {
+
+            operationDisplay.textContent = "Operation: Addition";
+            operator = "+";
+            operand2 = displayEmpty();
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationClicked = 1;
+            continuousExpression = true;
+        }
+        else {
+            //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
+            operationDisplay.textContent = "Operation: Addition";
+            operator = "+";
+            operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+            //Allows the result to be used in the next operation
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+        }
+    }
 });
 
 //Subtraction button
 const subButton = document.querySelector(".sub");
 subButton.addEventListener("click", function () {
-    operationClicked++;
-    sameOpButtonCount++;
-
-    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
-        return; 
-    }
-
-    //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
-    if (operationClicked > 1 && operator != "-") {
-        operand2 = displayEmpty();
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationDisplay.textContent = "Operation: Subtraction";
-        operator = "-";
-        continuousExpression = true;
+    //Error check
+    if (errorActivated === true) {
         return;
     }
-
-    //If the user keeps adding things to the math expression, then calculate and use result in next operation
-    if (operationClicked > 1 && equalsUsed === false) {
-
-        operationDisplay.textContent = "Operation: Subtraction";
-        operator = "-";
-        operand2 = displayEmpty();
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
-        }
-
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationClicked = 1;
-        continuousExpression = true;
-    }
     else {
-        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
-        operationDisplay.textContent = "Operation: Subtraction";
-        operator = "-";
-        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+        operationClicked++;
+        sameOpButtonCount++;
 
-        //Allows the result to be used in the next operation
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
+        if (sameOpButtonCount >= 2) { //If the same operator button is pressed, do NOT do anything.
+            return;
         }
 
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
+        //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
+        if (operationClicked > 1 && operator != "-") {
+            operand2 = displayEmpty();
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationDisplay.textContent = "Operation: Subtraction";
+            operator = "-";
+            continuousExpression = true;
+            return;
+        }
+
+        //If the user keeps adding things to the math expression, then calculate and use result in next operation
+        if (operationClicked > 1 && equalsUsed === false) {
+
+            operationDisplay.textContent = "Operation: Subtraction";
+            operator = "-";
+            operand2 = displayEmpty();
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationClicked = 1;
+            continuousExpression = true;
+        }
+        else {
+            //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
+            operationDisplay.textContent = "Operation: Subtraction";
+            operator = "-";
+            operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+            //Allows the result to be used in the next operation
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+        }
     }
 });
 
 //Multiplication button
 const multButton = document.querySelector(".mult");
 multButton.addEventListener("click", function () {
-    operationClicked++;
-    sameOpButtonCount++;
-
-    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
-        return; 
-    }
-
-    //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
-    if (operationClicked > 1 && operator != "*") {
-        operand2 = displayEmpty();
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationDisplay.textContent = "Operation: Multiplication";
-        operator = "*";
-        continuousExpression = true;
+    //Error check
+    if (errorActivated === true) {
         return;
     }
-
-    //If the user keeps adding things to the math expression, then calculate and use result in next operation
-    if (operationClicked > 1 && equalsUsed === false) {
-
-        operationDisplay.textContent = "Operation: Multiplication";
-        operator = "*";
-        operand2 = displayEmpty();
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
-        }
-
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationClicked = 1;
-        continuousExpression = true;
-    }
     else {
-        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
-        operationDisplay.textContent = "Operation: Multiplication";
-        operator = "*";
-        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+        operationClicked++;
+        sameOpButtonCount++;
 
-        //Allows the result to be used in the next operation
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
+        if (sameOpButtonCount >= 2) { //If the same operator button is pressed, do NOT do anything.
+            return;
         }
 
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
+        //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
+        if (operationClicked > 1 && operator != "*") {
+            operand2 = displayEmpty();
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationDisplay.textContent = "Operation: Multiplication";
+            operator = "*";
+            continuousExpression = true;
+            return;
+        }
+
+        //If the user keeps adding things to the math expression, then calculate and use result in next operation
+        if (operationClicked > 1 && equalsUsed === false) {
+
+            operationDisplay.textContent = "Operation: Multiplication";
+            operator = "*";
+            operand2 = displayEmpty();
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationClicked = 1;
+            continuousExpression = true;
+        }
+        else {
+            //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
+            operationDisplay.textContent = "Operation: Multiplication";
+            operator = "*";
+            operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+            //Allows the result to be used in the next operation
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+        }
     }
 });
 
 //Division button
 const divisButton = document.querySelector(".divis");
 divisButton.addEventListener("click", function () {
-    operationClicked++;
-    sameOpButtonCount++;
-
-    if(sameOpButtonCount >= 2){ //If the same operator button is pressed, do NOT do anything.
-        return; 
-    }
-
-    //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
-    if(operationClicked > 1 && operator != "/"){
-        operand2 = displayEmpty();
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationDisplay.textContent = "Operation: Division";
-        operator = "/";
-        continuousExpression = true;
+    //Error check
+    if (errorActivated === true) {
         return;
     }
-    
-    //If the user keeps adding things to the math expression, then calculate and use result in next operation
-    if (operationClicked > 1 && equalsUsed === false) {
-
-        operationDisplay.textContent = "Operation: Division";
-        operator = "/";
-        operand2 = displayEmpty();
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
-        }
-
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
-        displayStored = operate(operand1, operator, operand2);
-        calcDisplay.textContent = displayStored;
-        operand1 = displayEmpty();
-        operationClicked = 1;
-        continuousExpression = true;
-    }
     else {
-        //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
-        operationDisplay.textContent = "Operation: Division";
-        operator = "/";
-        operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+        operationClicked++;
+        sameOpButtonCount++;
 
-        //Allows the result to be used in the next operation
-        if (equalsUsed === true) {
-            equalsUsed = false;
-            operand1 = parseInt(displayStored);
+        if (sameOpButtonCount >= 2) { //If the same operator button is pressed, do NOT do anything.
+            return;
         }
 
-        displayStored = "";
-        calcDisplay.textContent = displayStored;
+        //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
+        if (operationClicked > 1 && operator != "/") {
+            operand2 = displayEmpty();
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationDisplay.textContent = "Operation: Division";
+            operator = "/";
+            continuousExpression = true;
+            return;
+        }
+
+        //If the user keeps adding things to the math expression, then calculate and use result in next operation
+        if (operationClicked > 1 && equalsUsed === false) {
+
+            operationDisplay.textContent = "Operation: Division";
+            operator = "/";
+            operand2 = displayEmpty();
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+            displayStored = operate(operand1, operator, operand2);
+            calcDisplay.textContent = displayStored;
+            operand1 = displayEmpty();
+            operationClicked = 1;
+            continuousExpression = true;
+        }
+        else {
+            //Store the operator and the operand 1 to use (even if it is blank, then use 0) 
+            operationDisplay.textContent = "Operation: Division";
+            operator = "/";
+            operand1 = displayEmpty(); //If the display is left empty "" then tell it to store 0 in operand1
+
+            //Allows the result to be used in the next operation
+            if (equalsUsed === true) {
+                equalsUsed = false;
+                operand1 = parseInt(displayStored);
+            }
+
+            displayStored = "";
+            calcDisplay.textContent = displayStored;
+        }
     }
 });
 
@@ -446,5 +469,37 @@ equalsButton.addEventListener("click", function () {
         displayStored = operate(operand1, operator, operand2);
         calcDisplay.textContent = displayStored;
         operationDisplay.textContent = "";
+    }
+});
+
+//Change sign button (positive and negative)
+const signButton = document.querySelector(".signChange");
+signButton.addEventListener("click", function () {
+    //Error check
+    if (errorActivated === true) {
+        return;
+    }
+    else {
+        //If there is an empty display or zero, do nothing
+        if (displayStored === "" || displayStored === 0 || displayStored === "0") {
+            return;
+        }
+
+        //Convert the current display into an array, then check if it has a negative sign or not
+        let numArr = displayStored.toString().split("");
+        console.log(numArr);
+        if (numArr.includes("-")) { //negative to positive
+            numArr.shift();
+            displayStored = numArr.join("");
+            displayStored = parseInt(displayStored);
+            calcDisplay.textContent = displayStored;
+        }
+        else { //positive to negative
+            numArr.unshift("-");
+            console.log(numArr);
+            displayStored = numArr.join("");
+            displayStored = parseInt(displayStored);
+            calcDisplay.textContent = displayStored;
+        }
     }
 });
