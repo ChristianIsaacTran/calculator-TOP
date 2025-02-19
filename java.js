@@ -152,7 +152,7 @@ function reset() {
     errorActivated = false;
     continuousExpression = false;
     sameOpButtonCount = 0;
-
+    decimalActivated = false;
 }
 
 //function to check if user has empty display
@@ -161,7 +161,7 @@ function displayEmpty() {
         return 0;
     }
     else {
-        return parseInt(displayStored);
+        return Number(displayStored);
     }
 }
 
@@ -204,6 +204,7 @@ addButton.addEventListener("click", function () {
 
         //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
         if (operationClicked > 1 && operator != "+") {
+            decimalActivated = false;
             operand2 = displayEmpty();
             displayStored = operate(operand1, operator, operand2);
             calcDisplay.textContent = displayStored;
@@ -216,15 +217,15 @@ addButton.addEventListener("click", function () {
 
         //If the user keeps adding things to the math expression, then calculate and use result in next operation
         if (operationClicked > 1 && equalsUsed === false) {
-
+            
             operationDisplay.textContent = "Operation: Addition";
             operator = "+";
             operand2 = displayEmpty();
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
             displayStored = operate(operand1, operator, operand2);
@@ -242,9 +243,9 @@ addButton.addEventListener("click", function () {
             //Allows the result to be used in the next operation
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
         }
@@ -268,6 +269,7 @@ subButton.addEventListener("click", function () {
 
         //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
         if (operationClicked > 1 && operator != "-") {
+            decimalActivated = false;
             operand2 = displayEmpty();
             displayStored = operate(operand1, operator, operand2);
             calcDisplay.textContent = displayStored;
@@ -286,9 +288,9 @@ subButton.addEventListener("click", function () {
             operand2 = displayEmpty();
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
             displayStored = operate(operand1, operator, operand2);
@@ -306,9 +308,9 @@ subButton.addEventListener("click", function () {
             //Allows the result to be used in the next operation
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
         }
@@ -332,6 +334,7 @@ multButton.addEventListener("click", function () {
 
         //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
         if (operationClicked > 1 && operator != "*") {
+            decimalActivated = false;
             operand2 = displayEmpty();
             displayStored = operate(operand1, operator, operand2);
             calcDisplay.textContent = displayStored;
@@ -350,9 +353,9 @@ multButton.addEventListener("click", function () {
             operand2 = displayEmpty();
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
             displayStored = operate(operand1, operator, operand2);
@@ -370,9 +373,9 @@ multButton.addEventListener("click", function () {
             //Allows the result to be used in the next operation
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
         }
@@ -396,6 +399,7 @@ divisButton.addEventListener("click", function () {
 
         //If the user clicked this button from a different button, do the previous operation first and assign result to operand1
         if (operationClicked > 1 && operator != "/") {
+            decimalActivated = false;
             operand2 = displayEmpty();
             displayStored = operate(operand1, operator, operand2);
             calcDisplay.textContent = displayStored;
@@ -414,9 +418,9 @@ divisButton.addEventListener("click", function () {
             operand2 = displayEmpty();
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
             displayStored = operate(operand1, operator, operand2);
@@ -434,9 +438,9 @@ divisButton.addEventListener("click", function () {
             //Allows the result to be used in the next operation
             if (equalsUsed === true) {
                 equalsUsed = false;
-                operand1 = parseInt(displayStored);
+                operand1 = Number(displayStored);
             }
-
+            decimalActivated = false;
             displayStored = "";
             calcDisplay.textContent = displayStored;
         }
@@ -491,15 +495,32 @@ signButton.addEventListener("click", function () {
         if (numArr.includes("-")) { //negative to positive
             numArr.shift();
             displayStored = numArr.join("");
-            displayStored = parseInt(displayStored);
+            displayStored = Number(displayStored);
             calcDisplay.textContent = displayStored;
         }
         else { //positive to negative
             numArr.unshift("-");
             console.log(numArr);
             displayStored = numArr.join("");
-            displayStored = parseInt(displayStored);
+            displayStored = Number(displayStored);
             calcDisplay.textContent = displayStored;
         }
+    }
+});
+
+//Decimal Sign button 
+let decimalActivated = false; //Flag for only one decimal point since a number can only have one decimal point
+const decimalButton = document.querySelector(".decimal");
+decimalButton.addEventListener("click", function(){
+    let numArr = displayStored.toString().split(""); //Check if decimal point already exists
+
+    //Error check and decimal used only once check. If the user tries to put another decimal do nothing.
+    if(errorActivated === true || decimalActivated === true || numArr.includes(".")){
+        return;
+    }
+    else{
+        decimalActivated = true; 
+        displayStored += ".";
+        calcDisplay.textContent = displayStored;
     }
 });
