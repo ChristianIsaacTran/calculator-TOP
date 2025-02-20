@@ -534,53 +534,267 @@ in as an "input". Any key that is pressed will be taken into account.
 document.addEventListener("keydown", (input) => {
     console.log(input);
     if (errorActivated === false) {
-        //Reset calculator if operation already happened with equals
-        if(equalsUsed === true){
-            reset();
-            equalsUsed = false; 
-        }
-
         //Handle number keys and operator keyboard inputs
         switch (input.key) {
             case "0":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "1":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "2":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "3":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "4":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "5":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "6":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "7":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "8":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
             case "9":
-                displayStored += input.key;
-                calcDisplay.textContent = displayStored;
+                sameOpButtonCount = 0;
+                //Resets the display and math expression if the equals sign has been used already for new calculation
+                if (equalsUsed === true) {
+                    reset();
+                    displayStored += input.key;
+                    calcDisplay.textContent = displayStored;
+                    equalsUsed = false;
+                }
+                else {
+                    if (continuousExpression === true && equalsUsed === false) {
+                        if (continuousExpression === true) {
+                            displayStored = "";
+                            continuousExpression = false;
+                        }
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+
+
+                    }
+                    else {
+                        displayStored += input.key;
+                        calcDisplay.textContent = displayStored;
+                    }
+                }
                 break;
 
             //When operation buttons are inputted into keyboard, simulate a click event on buttons
@@ -602,7 +816,7 @@ document.addEventListener("keydown", (input) => {
             case "Enter":
                 equalsButton.click();
                 break;
-            case ".": 
+            case ".":
                 decimalButton.click();
                 break;
 
