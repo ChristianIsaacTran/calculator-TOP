@@ -819,9 +819,26 @@ document.addEventListener("keydown", (input) => {
             case ".":
                 decimalButton.click();
                 break;
+            case "Backspace":
+                backButton.click();
+                break;
 
         }
     }
 });
 
 //Adding a "backspace" button to HTML and javascript code
+const backButton = document.querySelector(".backspace");
+backButton.addEventListener("click", function () {
+    let numArr = displayStored.toString().split("");
+
+    //If the calculator number is empty, a zero, or error, then do nothing.
+    if (errorActivated === true || displayStored === "" || displayStored === "0" || displayStored === 0) {
+        return;
+    }
+    else {
+        numArr.pop();
+        displayStored = numArr.join("");
+        calcDisplay.textContent = displayStored;
+    }
+});
