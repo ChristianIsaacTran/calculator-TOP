@@ -217,7 +217,7 @@ addButton.addEventListener("click", function () {
 
         //If the user keeps adding things to the math expression, then calculate and use result in next operation
         if (operationClicked > 1 && equalsUsed === false) {
-            
+
             operationDisplay.textContent = "Operation: Addition";
             operator = "+";
             operand2 = displayEmpty();
@@ -511,16 +511,91 @@ signButton.addEventListener("click", function () {
 //Decimal Sign button 
 let decimalActivated = false; //Flag for only one decimal point since a number can only have one decimal point
 const decimalButton = document.querySelector(".decimal");
-decimalButton.addEventListener("click", function(){
+decimalButton.addEventListener("click", function () {
     let numArr = displayStored.toString().split(""); //Check if decimal point already exists
 
     //Error check and decimal used only once check. If the user tries to put another decimal do nothing.
-    if(errorActivated === true || decimalActivated === true || numArr.includes(".")){
+    if (errorActivated === true || decimalActivated === true || numArr.includes(".")) {
         return;
     }
-    else{
-        decimalActivated = true; 
+    else {
+        decimalActivated = true;
         displayStored += ".";
         calcDisplay.textContent = displayStored;
+    }
+});
+
+//Addign keyboard support
+/*
+Adding an event listener to the entire document/DOM to 
+check for any "keydown" events that happen, then log them 
+in as an "input". Any key that is pressed will be taken into account.
+*/
+document.addEventListener("keydown", (input) => {
+    console.log(input);
+    if (errorActivated === false) {
+        //Handle number keys and operator keyboard inputs
+        switch (input.key) {
+            case "0":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "1":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "2":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "3":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "4":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "5":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "6":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "7":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "8":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+            case "9":
+                displayStored += input.key;
+                calcDisplay.textContent = displayStored;
+                break;
+
+            //When operation buttons are inputted into keyboard, simulate a click event on buttons
+            case "+":
+                addButton.click();
+                break;
+            case "-":
+                subButton.click();
+                break;
+            case "/":
+                divisButton.click();
+                break;
+            case "*":
+                multButton.click();
+                break;
+            case "=":
+                equalsButton.click();
+                break;
+            case "Enter":
+                equalsButton.click();
+                break;
+        }
     }
 });
