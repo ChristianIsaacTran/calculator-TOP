@@ -525,7 +525,7 @@ decimalButton.addEventListener("click", function () {
     }
 });
 
-//Addign keyboard support
+//Adding keyboard support
 /*
 Adding an event listener to the entire document/DOM to 
 check for any "keydown" events that happen, then log them 
@@ -534,6 +534,12 @@ in as an "input". Any key that is pressed will be taken into account.
 document.addEventListener("keydown", (input) => {
     console.log(input);
     if (errorActivated === false) {
+        //Reset calculator if operation already happened with equals
+        if(equalsUsed === true){
+            reset();
+            equalsUsed = false; 
+        }
+
         //Handle number keys and operator keyboard inputs
         switch (input.key) {
             case "0":
@@ -596,6 +602,12 @@ document.addEventListener("keydown", (input) => {
             case "Enter":
                 equalsButton.click();
                 break;
+            case ".": 
+                decimalButton.click();
+                break;
+
         }
     }
 });
+
+//Adding a "backspace" button to HTML and javascript code
