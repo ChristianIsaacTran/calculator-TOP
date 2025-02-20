@@ -63,21 +63,14 @@ let operand2 = 0;
 //step 3: Create a function that takes the operator and two numbers then performs the operation on the numbers (call it operate()) by
 //calling the functions made above in step 1.
 function operate(operand1, operator, operand2) {
-    console.log("OPERATE CALLED ON: " + operator);
-    console.log("Operand 1: " + operand1);
-    console.log("Operand 2: " + operand2);
     switch (operator) {
         case "+":
-            console.log("RESULT: " + add(operand1, operand2));
             return add(operand1, operand2);
         case "-":
-            console.log("RESULT: " + subtract(operand1, operand2));
             return subtract(operand1, operand2);
         case "*":
-            console.log("RESULT: " + multiply(operand1, operand2));
             return multiply(operand1, operand2);
         case "/":
-            console.log("RESULT: " + divide(operand1, operand2));
             return divide(operand1, operand2);
     }
 }
@@ -491,7 +484,6 @@ signButton.addEventListener("click", function () {
 
         //Convert the current display into an array, then check if it has a negative sign or not
         let numArr = displayStored.toString().split("");
-        console.log(numArr);
         if (numArr.includes("-")) { //negative to positive
             numArr.shift();
             displayStored = numArr.join("");
@@ -500,7 +492,6 @@ signButton.addEventListener("click", function () {
         }
         else { //positive to negative
             numArr.unshift("-");
-            console.log(numArr);
             displayStored = numArr.join("");
             displayStored = Number(displayStored);
             calcDisplay.textContent = displayStored;
@@ -532,7 +523,6 @@ check for any "keydown" events that happen, then log them
 in as an "input". Any key that is pressed will be taken into account.
 */
 document.addEventListener("keydown", (input) => {
-    console.log(input);
     if (errorActivated === false) {
         //Handle number keys and operator keyboard inputs
         switch (input.key) {
