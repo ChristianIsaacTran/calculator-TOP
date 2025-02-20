@@ -40,6 +40,7 @@ h1 {
     flex-direction: column;
     border-color: black;
 }
+
 .innerContainer {
     border-color: grey;
     padding: 20px;
@@ -93,7 +94,7 @@ button {
 }
 
 .modifier {
-    background-color:blanchedalmond;
+    background-color: blanchedalmond;
 }
 
 .clear {
@@ -104,10 +105,11 @@ button {
     background-color: lightskyblue;
 }
 
-.operationContainer{
+.operationContainer {
     display: flex;
     justify-content: end;
 }
+
 .operationBox {
     display: flex;
     justify-content: center;
@@ -117,4 +119,10 @@ button {
     height: 70px;
     font-weight: 900;
     font-size: 25px;
+}
+
+.backspace {
+    font-size: 90px;
+    text-align: center;
+    background-color: orange;
 }
